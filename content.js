@@ -297,7 +297,6 @@ const generateSTYLES = () => {
   };
 
 const webTimer = setTimeout(timesOut, 1000);
-
 function timesOut() {
   switch(window.location.hostname) {
     case "www.youtube.com":
@@ -331,11 +330,7 @@ function timesOut() {
   }
 
   const pressMeDaddy = document.getElementById("yesButton").getElementsByClassName("dButton")[0];
-
   pressMeDaddy.addEventListener("click", function () {
-
     alert("You pressed the button");
-
   });
-
 }

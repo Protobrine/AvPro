@@ -11,5 +11,11 @@
     "action": {
         "default_popup": "popup.html",
         "default_title": "SumPopup"
-    }
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "scripting"
+    ]
 }
