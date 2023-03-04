@@ -1,4 +1,5 @@
 //Lock down browser
+
 const generateNoPorn = (pageName) => {
   return `
  
@@ -296,41 +297,38 @@ const generateSTYLES = () => {
      </style>`;
   };
 
-const webTimer = setTimeout(timesOut, 1000);
-function timesOut() {
-  switch(window.location.hostname) {
-    case "www.youtube.com":
-        document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateHTML("YOUTUBE")
-        break;
-    case "www.facebook.com":
-        document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateHTML("FACEBOOK")
-        break;
-    case "discord.com":
-        document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateHTML("DISCORD")
-        break;
-    case "twitter.com":
-        document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateHTML("TWITTER")
-        break;
-    case "www.reddit.com":
-        document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateHTML("REDDIT")
-        break;
-    case "www.pornhub.com":
-        document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateNoPorn("PORNHUB")
-        break;
-    case "www.netflix.com":
-        document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateHTML("NETFLIX")
-        break;
+window.addEventListener("load", function() {
+  const webUrl = window.location.hostname;
+  if (webUrl == 'ccmhidfjhfehdbeonhomhlmglejlchjl') {
+    console.log('NO');
+  } else {
+    console.log('the content url is ' + webUrl);
+    chrome.runtime.sendMessage({
+      method: 'webUrl',
+      key: 'key',
+      value: webUrl
+    }, () => {
+    });
   }
+}, false);
 
-  const pressMeDaddy = document.getElementById("yesButton").getElementsByClassName("dButton")[0];
-  pressMeDaddy.addEventListener("click", function () {
+window.addEventListener('load', function() {
+  chrome.runtime.sendMessage({
+    method: 'blockIt',
+    key: 'key',
+  }, (response) => {
+    let block = response.value
+    Block(block);
+  })
+}, false)
+
+function Block(block) {
+  if (block == 'block') {
+    document.head.innerHTML = generateSTYLES();
+    document.body.innerHTML = generateHTML();
+    const pressMeDaddy = document.getElementById("yesButton").getElementsByClassName("dButton")[0];
+    pressMeDaddy.addEventListener("click", function () {
     alert("You pressed the button");
   });
+  }
 }

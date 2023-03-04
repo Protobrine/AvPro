@@ -9,46 +9,58 @@ const divother = document.getElementById("divother");
 // Timing buttons
 const startBtn = document.getElementById('start');
 const pauseBtn = document.getElementById('pause');
+// Blocklist buttons
+const testButton = document.getElementById('testBlock');
+const btnBlockSite = document.getElementById('blockSite');
 
 addEventListener('DOMContentLoaded', () => {
     backgroundGet();
 });
 
-btn_blocking.addEventListener('click', () =>{
-    divblock.style.display='block';
-    divtiming.style.display='none';
-    divother.style.display='none';
-});
-
-btn_timing.addEventListener('click', () =>{
-    divblock.style.display='none';
-    divtiming.style.display='block';
-    divother.style.display='none';
-});
-
-btn_otherThings.addEventListener('click', () =>{
-    divblock.style.display='none';
-    divtiming.style.display='none';
-    divother.style.display='block';
-});
-
-pauseBtn.addEventListener('click' , () => {
-    clearInterval(yes);
-    document.getElementById("start").disabled = false;
-    document.getElementById("pause").disabled = true;
-    let totalSeconds = 0;
-    chrome.runtime.sendMessage({
-        method: 'send',
-        key: 'key',
-        value: totalSeconds
-    }, () => {
+if (btn_blocking) {
+    btn_blocking.addEventListener('click', () =>{
+        divblock.style.display='block';
+        divtiming.style.display='none';
+        divother.style.display='none';
     });
-});
+    
+    btn_timing.addEventListener('click', () =>{
+        divblock.style.display='none';
+        divtiming.style.display='block';
+        divother.style.display='none';
+    });
+    
+    btn_otherThings.addEventListener('click', () =>{
+        divblock.style.display='none';
+        divtiming.style.display='none';
+        divother.style.display='block';
+    });
+}
 
-startBtn.addEventListener('click', () => {
-    countdownUpdate();
-    chromeCount();
-});
+
+//Timer functions
+
+if (pauseBtn) {
+    pauseBtn.addEventListener('click' , () => {
+        clearInterval(yes);
+        document.getElementById("start").disabled = false;
+        document.getElementById("pause").disabled = true;
+        let totalSeconds = 0;
+        chrome.runtime.sendMessage({
+            method: 'send',
+            key: 'key',
+            value: totalSeconds
+        }, () => {
+        });
+    });
+}
+if (startBtn) {
+    startBtn.addEventListener('click', () => {
+        countdownUpdate();
+        chromeCount();
+        urlBlockTime();
+    });
+}
 
 const addValue = function(numHours, numMinutes, numSeconds) {
     return +numSeconds + +(numMinutes*60) + +(numHours*3600);
@@ -116,4 +128,53 @@ function chromeCount() {
         value: totalSeconds
     }, () => {
     });
+}
+
+// //Blacklist?
+
+if (btnBlockSite) {
+    btnBlockSite.addEventListener('click', () => {
+      chrome.runtime.sendMessage({method: 'urlGet', key: 'key',}, (response) => {
+        urlBlock = response.value;
+        if (urlBlock == 'dupe') {
+            alert('This website is already blocked')
+        } else {
+            alert('You have blocked ' + urlBlock)
+            const blockedUrl = getUrl();
+            let urlobject = {
+            id: Math.floor(Math.random() * 100000),
+            content: urlBlock
+            }
+            blockedUrl.push(urlobject);
+            saveUrl(blockedUrl);
+        }
+      })
+    })
+  }
+  
+function saveUrl(blockedUrl) {
+localStorage.setItem("urlToBlock", JSON.stringify(blockedUrl))
+}
+
+function getUrl() {
+return JSON.parse(localStorage.getItem("urlToBlock") || "[]");
+}
+
+// if (testButton) {
+// testButton.addEventListener('click', () => {
+//     urlBlockTime();
+// })
+// }
+
+function urlBlockTime() {
+const blockedUrl = getUrl();
+    for (let index = 0; index < blockedUrl.length; index++) {
+    let urlCheck = Object.values(blockedUrl[index]);
+        console.log('Checking URL ' + urlCheck[1]);
+    chrome.runtime.sendMessage({
+        method: 'urlSend',
+        key: 'key',
+        value: urlCheck[1]
+    })
+    }
 }

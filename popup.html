@@ -14,33 +14,38 @@
         </div>
         <div class="blocks">
             <div class="divblock" id="divblock">
-                <!-- <img src="https://media.discordapp.net/attachments/839198357674131516/1073265861252632696/GettyImages-119505258-20a15e9.png?width=1021&height=670" width="100%" height="100%"> -->
+                <div class="blockBtns">
+                    <button class="blkButton" id="blockSite">Block this site</button>
+                    <button class="blkButton" id="testBlock">Testing</button>
+                </div>
             </div>
             <div class="divtiming" id="divtiming">
-                <table class="tableTime">
-                    <tr>
-                        <td id="hrs">00</td>
-                        <td>:</td>
-                        <td id="min">00</td>
-                        <td>:</td>
-                        <td id="sec">00</td>
-                    </tr>
-                </table>
-                <div class="linebreak"></div>
-                <form class="walangLabel" action="popup.html">
-                    <label for="hours">hrs</label>
-                    <label for="minutes">min</label>
-                    <label for="seconds">sec</label>
-                </form>
-                <form class="walangLabel" action="popup.html">
-                    <input type="number" value="00" min="0" max="23" id="hours">
-                    <input type="number" value="00" min="0" max="59" id="minutes">
-                    <input type="number" value="00" min="0" max="59" id="seconds">
-                </form>
-                <div class="linebreak"></div>
-                <div class="timingBtnDiv">
-                    <button class="timingbtn" type="button" id="start">Start</button>
-                    <button class="timingbtn" type="button" id="pause">Pause</button>
+                <div class="backgroundImg">
+                    <table class="tableTime">
+                        <tr>
+                            <td id="hrs">00</td>
+                            <td>:</td>
+                            <td id="min">00</td>
+                            <td>:</td>
+                            <td id="sec">00</td>
+                        </tr>
+                    </table>
+                    <div class="linebreak"></div>
+                    <form class="walangLabel" action="popup.html">
+                        <label for="hours">hrs</label>
+                        <label for="minutes">min</label>
+                        <label for="seconds">sec</label>
+                    </form>
+                    <form class="walangLabel" action="popup.html">
+                        <input type="number" value="00" min="0" max="23" id="hours">
+                        <input type="number" value="00" min="0" max="59" id="minutes">
+                        <input type="number" value="00" min="0" max="59" id="seconds">
+                    </form>
+                    <div class="linebreak"></div>
+                    <div class="timingBtnDiv">
+                        <button class="timingbtn" type="button" id="start">Start</button>
+                        <button class="timingbtn" type="button" id="pause">Pause</button>
+                    </div>
                 </div>
             </div>
             <div class="divother" id="divother">
