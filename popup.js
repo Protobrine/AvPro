@@ -1,6 +1,6 @@
 // Division Buttons
 const btn_blocking = document.getElementById("blocking");
-const btn_timing= document.getElementById("timing");
+const btn_timing = document.getElementById("timing");
 const btn_otherThings = document.getElementById("otherThings");
 // Division IDs
 const divblock = document.getElementById("divblock");
@@ -10,11 +10,12 @@ const divother = document.getElementById("divother");
 const startBtn = document.getElementById('start');
 const pauseBtn = document.getElementById('pause');
 // Blocklist buttons
-const testButton = document.getElementById('testBlock');
+// const testButton = document.getElementById('testBlock');
 const btnBlockSite = document.getElementById('blockSite');
 
 addEventListener('DOMContentLoaded', () => {
     backgroundGet();
+    urlBlockTime();
 });
 
 if (btn_blocking) {
@@ -38,7 +39,7 @@ if (btn_blocking) {
 }
 
 
-//Timer functions
+//Timer functions -----------------------------------------------------------------------------------------------
 
 if (pauseBtn) {
     pauseBtn.addEventListener('click' , () => {
@@ -71,14 +72,22 @@ function backgroundGet(anotherTotal) {
         totalSec = response.value;
         anotherTotal = totalSec;
         console.log(anotherTotal);
-        const bgHours = Math.floor(anotherTotal / 3600).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+
+        if (anotherTotal > 0) {
+            const bgHours = Math.floor(anotherTotal / 3600).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
         const bgMinutes = Math.floor((anotherTotal % 3600)/60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
         const bgSeconds = (anotherTotal % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}); 
 
         document.getElementById('hours').value = bgHours;
         document.getElementById('minutes').value = bgMinutes;
         document.getElementById('seconds').value = bgSeconds;
+        
+        divblock.style.display='none';
+        divtiming.style.display='block';
+        divother.style.display='none';
+
         countdownUpdate();
+        }
     });
 }
 
@@ -87,6 +96,7 @@ function countdownUpdate() {
     let totalSeconds = getValue(seconds);
     document.getElementById("start").disabled = true;
     document.getElementById("pause").disabled = false;
+    document.getElementById("blocking").disabled = true;
     yes = setInterval(counting, 1000);
     function counting() {
         if (totalSeconds >= 0) {
@@ -107,6 +117,7 @@ function countdownUpdate() {
             document.getElementById('minutes').innerHTML = '00';
             document.getElementById('seconds').innerHTML = '00';
             document.getElementById("start").disabled = false;
+            document.getElementById("blocking").disabled = false;
         }
         totalSeconds--;
     } 
@@ -130,41 +141,50 @@ function chromeCount() {
     });
 }
 
-// //Blacklist?
+//Blacklist -----------------------------------------------------------------------------------------------
+
+const urlList = document.getElementById("urlList");
 
 if (btnBlockSite) {
     btnBlockSite.addEventListener('click', () => {
       chrome.runtime.sendMessage({method: 'urlGet', key: 'key',}, (response) => {
         urlBlock = response.value;
         if (urlBlock == 'dupe') {
-            alert('This website is already blocked')
+            window.alert('This website is already blocked')
         } else {
-            alert('You have blocked ' + urlBlock)
+            window.alert('You have blocked ' + urlBlock)
             const blockedUrl = getUrl();
+            const storeButton = getButton();
+
             let urlobject = {
             id: Math.floor(Math.random() * 100000),
             content: urlBlock
-            }
+            };
+
+            let buttonObj = {
+                id: "btn" + urlobject.id,
+                content: "-"
+            };
+
+            const urlElement = createList(urlobject.id, urlobject.content);
+            urlList.appendChild(urlElement);
+
+            const buttonElem = createButton(buttonObj.id, buttonObj.content);
+            const elementId = document.getElementById(urlobject.id);
+            elementId.appendChild(buttonElem)
+
+            // const lineBreak = document.createElement("hr");
+            // urlList.appendChild(lineBreak);
+
             blockedUrl.push(urlobject);
+            storeButton.push(buttonObj);
             saveUrl(blockedUrl);
+            saveButton(storeButton);
+            urlBlockTime();
         }
       })
     })
   }
-  
-function saveUrl(blockedUrl) {
-localStorage.setItem("urlToBlock", JSON.stringify(blockedUrl))
-}
-
-function getUrl() {
-return JSON.parse(localStorage.getItem("urlToBlock") || "[]");
-}
-
-// if (testButton) {
-// testButton.addEventListener('click', () => {
-//     urlBlockTime();
-// })
-// }
 
 function urlBlockTime() {
 const blockedUrl = getUrl();
@@ -178,3 +198,120 @@ const blockedUrl = getUrl();
     })
     }
 }
+
+function createList(id, content) {
+    const element = document.createElement("li");
+
+    element.classList.add("theUrls");
+    element.appendChild(document.createTextNode(content));
+    element.id = id;
+    
+    return element;
+}
+
+function createButton(id, content) {
+    const button = document.createElement("button");
+
+    button.classList.add('urlButton');
+    button.appendChild(document.createTextNode(content));
+    button.id = id;
+
+    button.addEventListener('click', () => {
+        console.log('It is removed ' + id);
+        const uSure = confirm('Are you sure you want to remove this?');
+        if (uSure) {
+            removeButton(id, button)
+        }
+    })
+
+    return button;
+}
+
+getUrl().forEach(theUrls => {
+    const urlElement = createList(theUrls.id, theUrls.content);
+    urlList.appendChild(urlElement);
+
+    // const lineBreak = document.createElement("hr");
+    // urlList.appendChild(lineBreak);
+});
+    
+getButton().forEach(urlButton => {
+    let newId = urlButton.id
+    newId = newId.replace('btn', '');
+
+    const theUrls = document.getElementById(newId);
+    const buttonElement = createButton(urlButton.id, urlButton.content);
+    theUrls.appendChild(buttonElement, theUrls);
+})
+
+
+function saveButton(urlButton) {
+    localStorage.setItem("urlButton", JSON.stringify(urlButton));
+}
+
+function getButton() {
+    return JSON.parse(localStorage.getItem("urlButton") || "[]");
+}
+
+function saveUrl(blockedUrl) {
+    localStorage.setItem("urlToBlock", JSON.stringify(blockedUrl))
+}
+
+function getUrl() {
+    return JSON.parse(localStorage.getItem("urlToBlock") || "[]");
+}
+
+function removeButton(id, element) {
+    const button = getButton().filter(urlButton => urlButton.id != id)
+    let newId = id;
+    newId = newId.replace('btn', '');
+    const theUrls = document.getElementById(newId);
+
+    const url = getUrl().filter(blockedUrl => blockedUrl.id != newId)
+    const btnUrl = document.getElementById(id).parentElement;
+
+    let linkOnly = btnUrl.innerText;
+    linkOnly = linkOnly.replace('-', '');
+
+    console.log(linkOnly);
+    chrome.runtime.sendMessage({
+        method: 'getLink',
+        key: 'key',
+        value: linkOnly
+    }, () => {
+    });
+
+    saveUrl(url);
+    saveButton(button);
+
+    theUrls.removeChild(element);
+    urlList.removeChild(btnUrl);
+
+}
+
+// How to get the object thingy
+// const urls = getUrl();
+    // const findUrls = urls.find(content => content.id == newId);
+    // const urlContent = findUrls.content;
+
+// Get active tab but also errors
+// chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+//     if (tabs[0] == undefined) {
+//         document.getElementById('linkNow').innerHTML = 'No site detected';
+//         console.log('This query undefined');
+//     } else {
+//         let tab = tabs[0];
+//         let nowTab = tab.url;
+//         document.getElementById('linkNow').innerHTML = nowTab;
+//     }
+// });
+
+// Sending errors
+// chrome.runtime.onMessage.addListener(
+//     function(message, sender, sendResponse) {
+//         if (message.msg == "getUrlText") {
+//             let textUrl = message.value;
+//             document.getElementById('linkNow').innerHTML = textUrl;
+//         }
+//     }
+// );

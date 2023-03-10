@@ -1,30 +1,4 @@
 //Lock down browser
-
-const generateNoPorn = (pageName) => {
-  return `
- 
-<div id="clouds">
-    <div class="cloud x1"></div>
-    <div class="cloud x1_5"></div>
-    <div class="cloud x2"></div>
-    <div class="cloud x3"></div>
-    <div class="cloud x4"></div>
-    <div class="cloud x5"></div>
-</div>
-<div class='c'>
-    <div class='_404'>BOBO</div>
-    <hr>
-    <div class='_1'>TROPA TIME SAKALAM!</div>
-    <br>
-    <div class='_2'>SIGMA > ${pageName}
-</div>
-<hr>
-<div id="yesButton">
-    <button class="dButton" type="button"> Button </button>
-</div>
- `;
-}
-
 const generateHTML = (pageName) => {
     return `
    

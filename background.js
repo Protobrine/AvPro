@@ -19,13 +19,20 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         }
       }
       break;
+
     case 'recv':
       sendResponse({value: value});
       break;
+
     case 'webUrl':
       url = message.value;
       console.log('The background url is ' + url);
       break;
+
+    case 'urlChange':
+      sendResponse({value: url});
+      break;
+
     case 'blockIt':
       const equalBlocked = blockedSites.includes(url);
       if (value > 0) {
@@ -35,6 +42,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         }
       }
       break;
+
     case 'urlGet':
       const dupeCheck = blockedSites.includes(url)
       if (dupeCheck) {
@@ -42,6 +50,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       }
       sendResponse({value: url});
       break;
+
     case 'urlSend':
       allUrl = message.value;
       const blockedDupe = blockedSites.includes(allUrl);
@@ -53,6 +62,25 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       }
       console.log("Sites to be blocked: " + blockedSites);
       break;
+
+    case 'getLink':
+      getLink = message.value;
+      
+      blockedSites.splice(blockedSites.indexOf(getLink), 1);
+      url = getLink;
+      console.log(blockedSites)
+      break;
+
   }
   return true;
 });
+
+// Sending errors on popup
+// function sendUrlText(url) {
+//   chrome.runtime.sendMessage({
+//     method: 'getUrlText',
+//     key: 'key',
+//     value: url
+//   }, () => {
+//   });
+// }

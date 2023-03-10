@@ -81,6 +81,70 @@
     justify-content: center;   
 }
 
+.theLink {
+    margin: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 18px;
+}
+
+.middle {
+    display: inline;
+    border: 2px rgb(0, 0, 0);
+    border-style: solid;
+    padding: 10px;
+}
+
+.webList {
+    height: 200px;
+    width: 275px;
+    border: 2px grey;
+    border-style: solid;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+
+.title {
+    text-align: center;
+    font-size: 18px;
+}
+
+.theUrls {
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 10px;
+}
+
+.urlButton {
+    background: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border-color: rgb(128, 195, 222);
+    cursor: pointer;
+    position: relative;
+    float: right; 
+}
+
+.border {
+    border: 2px indigo das;
+}
+
+.right {
+    position: relative;
+    float: right; 
+}
+
+.urlButton:hover {
+    background: #777555;
+}
+
 /* This is what contains in the timer */
 .divtiming {
     width: 100%;
@@ -163,4 +227,9 @@ input[type=number], select{
     background-color: darkgrey;
     height: 2px;
     flex-basis: 100%;
+}
+
+hr {
+    border-top: 1px solid #111111; 
+    border-bottom: 1px solid #111111; 
 }
