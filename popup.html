@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rancho&effect=fire-animation">
 </head>
 <body>
     <div class="container">
         <div class="top">
-            AvPro
+            <h4 class="font-effect-fire-animation">AvPro</h4>
         </div>
+        <div class="transitionDesign"></div>
         <div class="blocks">
 
             <!-- The block division -->
@@ -37,7 +40,7 @@
             <!-- The Timing Divison -->
 
             <div class="divtiming" id="divtiming">
-                <div class="backgroundImg">
+                <div class="marginThing">
                     <table class="tableTime">
                         <tr>
                             <td id="hrs">00</td>
@@ -72,10 +75,10 @@
                 <!-- <img src="https://media.discordapp.net/attachments/967459067079589958/1073219199247327362/220px-Flag_of_Germany_281935E2809319452C_square_version29.png" width="100%" height="100%"> -->
             </div>
         </div>
-        <div class="buttons">
-            <button class="blwBtn" type="button" id="blocking">Block</button>
-            <button class="blwBtn" type="button" id="timing">Timing</button>
-            <button class="blwBtn" type="button" id="otherThings">Others</button>
+        <div class="buttons" style="width: 100%;">
+            <button class="nrmBtn" type="button" style="width: 33.33%;" id="blocking"><i class="fa-solid fa-shield fa-2x"></i></button>
+            <button class="nrmBtn" type="button" style="width: 33.33%;" id="timing"><i class="fa-solid fa-clock fa-2x"></i></button>
+            <button class="nrmBtn" type="button" style="width: 33.33%;" id="otherThings"><i class="fa-solid fa-clipboard fa-2x"></i></button>
         </div>
     </div>
     <script src="popup.js" defer></script>

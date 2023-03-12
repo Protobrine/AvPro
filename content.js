@@ -273,7 +273,7 @@ const generateSTYLES = () => {
 
 window.addEventListener("load", function() {
   const webUrl = window.location.hostname;
-  if (webUrl == 'ccmhidfjhfehdbeonhomhlmglejlchjl') {
+  if (webUrl == 'dcmpockbkponbbpgbdiobaajgapicbga') {
     console.log('NO');
   } else {
     console.log('the content url is ' + webUrl);

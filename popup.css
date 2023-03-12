@@ -1,59 +1,97 @@
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Something that stays in the popup */
+/* Something that stays in the popup ----------------------------------------------------------------------------------*/
+
 .container {
     display: block;
     width: 300px;
     height: 550px;
-    background-color: skyblue;
+    background-color: #7FC8A9;
 }
 .top {
     display: block;
     width: 100%;
     height: 10%;
-    background-color: skyblue;
+    background-color: #7FC8A9;
     text-align: center;
     padding: 5px 5px;
     font-size: 40px;
-    font-family: 'Brush Script MT', cursive;
 }
-.buttons {
-    margin: 20px;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;   
-}
-.blwBtn {
-    background: white;
-    width: 90px;
-    height: 50px;
-    border-radius: 5px;
-    border-color: rgb(128, 195, 222);
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 500;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    transition: background 0.2s;
-}
-.blwBtn:hover {
-    background: rgba(0, 0, 0, 0.2);
-}
+
 .blocks {
     display: flex;
     width: 100%;
-    height: 73%;
+    height: 79%;
 }
 
-/* This is what contains in the block */
+.transitionDesign {
+    width: 100%;
+    height: 1%;
+    background-color: #3d8567;
+}
+
+/* The bottom buttons ----------------------------------------------------------------------------------*/
+
+.buttons {
+    width: 100%;
+    height: 54px;
+}
+
+.nrmBtn {
+  background-color: #7FC8A9;
+  border: 2px solid #444941; 
+  color: #444941;
+  padding: 10px 24px; 
+  cursor: pointer;
+  height: 100%; 
+  float: left; 
+}
+
+.buttons button:not(:last-child) {
+  border-right: none; 
+}
+
+.buttons:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.buttons button:hover {
+  background-color: #5F7A61;
+}
+
+.clickedBtn {
+    background-color: #5F7A61;
+    border: 2px solid #444941; 
+    color: #444941;
+    padding: 10px 24px; 
+    cursor: pointer;
+    height: 100%; 
+    float: left; 
+}
+
+.disabledBtn {
+    background-color: #609EA2;
+    border: 2px solid #444941; 
+    color: #444941;
+    padding: 10px 24px; 
+    cursor: pointer;
+    height: 100%; 
+    float: left; 
+}
+
+/* This is what contains in the block ----------------------------------------------------------------------------------*/
+
 .divblock {
     width: 100%;
     height: auto;
-    background: rgb(70, 209, 124);
+    background-color: #D5EEBB;
     display: block;
 }
 
@@ -145,22 +183,23 @@
     background: #777555;
 }
 
-/* This is what contains in the timer */
+/* This is what contains in the timer ----------------------------------------------------------------------------------*/
+
 .divtiming {
     width: 100%;
     height: auto;
-    background-color: rgb(70, 209, 124);
+    background-color: #D5EEBB;
     display: none;
 }
 
-.backgroundImg {
+/* .backgroundImg {
     width: 100%;
     height: 100%;
     background-image: url("https://media.discordapp.net/attachments/839198357674131516/1081537995171184660/AvocadoLogo.png?width=625&height=625");
     background-size: 400px 400px;
     background-position: center;
     opacity: 0.7;
-}
+} */
 
 .tableTime {
     width: 100%;
@@ -212,15 +251,17 @@ input[type=number], select{
     border-radius: 4px;
 }
 
-/* This is what contains in others */
+/* This is what contains in others ----------------------------------------------------------------------------------*/
+
 .divother {
     width: 100%;
     height: auto;
-    background: blue;
+    background-color: #D5EEBB;
     display: none;
 }
 
-/* other design things */
+/* other design things ----------------------------------------------------------------------------------*/
+
 .linebreak {
     margin-left: 10px;
     margin-right: 10px;

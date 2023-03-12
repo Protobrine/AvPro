@@ -38,6 +38,57 @@ if (btn_blocking) {
     });
 }
 
+// Designs -----------------------------------------------------------------------------------------------
+
+const bottomBtnList = document.querySelectorAll('.nrmBtn')
+let lastClicked;
+
+bottomBtnList.forEach( bottomBtn => {
+    lastClicked = Number(localStorage.lastClicked) 
+    console.log('last saved is ' + lastClicked)
+
+    if (isNaN(lastClicked)) {
+        bottomBtnList[0].classList.add('clickedBtn');
+    }
+
+    for (let index = 0; index < bottomBtnList.length; index++) {
+        if (lastClicked == index) {
+            bottomBtnList[index].classList.add('clickedBtn');
+            switch (index) {
+                case 0:
+                    divblock.style.display='block';
+                    divtiming.style.display='none';
+                    divother.style.display='none';
+                    break;
+
+                case 1:
+                    divblock.style.display='none';
+                    divtiming.style.display='block';
+                    divother.style.display='none';
+                    break;
+
+                case 2:
+                    divblock.style.display='none';
+                    divtiming.style.display='none';
+                    divother.style.display='block';
+                    break;
+            }
+        }
+    }
+    
+    bottomBtn.addEventListener('click', () => {
+        document.querySelector('.clickedBtn')?.classList.remove('clickedBtn');
+        bottomBtn.classList.add('clickedBtn');
+        console.log('Added the css ' + bottomBtn);
+
+        for (let index = 0; index < bottomBtnList.length; index++) {
+            if (bottomBtn == bottomBtnList[index]) {
+                console.log('Its the same with the ' + index)
+                localStorage.lastClicked = index;
+            }
+        }
+    });
+});
 
 //Timer functions -----------------------------------------------------------------------------------------------
 
@@ -74,17 +125,13 @@ function backgroundGet(anotherTotal) {
         console.log(anotherTotal);
 
         if (anotherTotal > 0) {
-            const bgHours = Math.floor(anotherTotal / 3600).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+        const bgHours = Math.floor(anotherTotal / 3600).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
         const bgMinutes = Math.floor((anotherTotal % 3600)/60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
         const bgSeconds = (anotherTotal % 60).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}); 
 
         document.getElementById('hours').value = bgHours;
         document.getElementById('minutes').value = bgMinutes;
         document.getElementById('seconds').value = bgSeconds;
-        
-        divblock.style.display='none';
-        divtiming.style.display='block';
-        divother.style.display='none';
 
         countdownUpdate();
         }
@@ -97,6 +144,7 @@ function countdownUpdate() {
     document.getElementById("start").disabled = true;
     document.getElementById("pause").disabled = false;
     document.getElementById("blocking").disabled = true;
+    bottomBtnList[0].classList.add('disabledBtn');
     yes = setInterval(counting, 1000);
     function counting() {
         if (totalSeconds >= 0) {
@@ -118,6 +166,7 @@ function countdownUpdate() {
             document.getElementById('seconds').innerHTML = '00';
             document.getElementById("start").disabled = false;
             document.getElementById("blocking").disabled = false;
+            document.querySelector('.disabledBtn').classList.replace('disabledBtn' ,'nrmBtn');
         }
         totalSeconds--;
     } 
