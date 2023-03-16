@@ -258,6 +258,102 @@ input[type=number], select{
     height: auto;
     background-color: #D5EEBB;
     display: none;
+    font-family: sans-serif;
+}
+
+header {
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 16px;
+}
+
+.todo-input {
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    background: white;
+}
+
+.todo-button {
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    background: white;
+    color: #d88771;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.todo-button:hover {
+    background: #d88771;
+    color: white;
+}
+
+.todo-container {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+}
+
+.todo-list {
+    list-style: none;
+    width: 90%;
+}
+
+.todo {
+    margin: 8px;
+    background: white;
+    color: black;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.5s ease;
+}
+
+.todo li {
+    flex: 1;
+}
+
+.delete-btn, .completed-btn {
+    background: #ff6f47;
+    color: white;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.completed-btn {
+    background: green;
+}
+
+.todo-item {
+    padding: 8px 8px;
+}
+
+.fa-trash, .fa-check {
+    pointer-events: none;
+}
+
+.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.fall {
+    transform: translateY(8rem) rotateZ(20deg);
+    opacity: 0;
 }
 
 /* other design things ----------------------------------------------------------------------------------*/

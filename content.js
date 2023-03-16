@@ -15,11 +15,11 @@ const generateHTML = (pageName) => {
       <hr>
       <div class='_1'>Stop procrastinating!</div>
       <br>
-      <div class='_2'>CAPSTONE > ${pageName}
+      <div class='_2'>DO YOUR WORK!
 </div>
   <hr>
   <div id="yesButton">
-      <button class="dButton" type="button"> Button </button>
+      <button class="dButton" type="button"> EXIT </button>
   </div>
    `;
 }
