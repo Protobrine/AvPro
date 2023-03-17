@@ -339,7 +339,7 @@ function removeButton(id, element) {
 
 }
 
-//To do list / Calendar -----------------------------------------------------------------------------------------------
+//To do list -----------------------------------------------------------------------------------------------
 
 const todoInput = document.querySelector('.todo-input');
 const todoButton = document.querySelector('.todo-button');
@@ -383,6 +383,7 @@ function deleteCheck(e) {
         const todo = item.parentElement;
 
         todo.classList.add('fall');
+        console.log(todo);
         removeTodos(todo);
         todo.addEventListener('transitionend', function () {
             todo.remove();
@@ -398,15 +399,15 @@ function deleteCheck(e) {
             todos = JSON.parse(localStorage.getItem('todos'));
         }
 
-        const todo = item.parentElement;
-        todo.classList.toggle("completed");
-        
-        const todoIndex = todo.children[0].innerText;
+    const todo = item.parentElement;
+    todo.classList.toggle("completed");
+    
+    const todoIndex = todo.children[0].innerText;
 
-        const findIt = (text) => text.content == todoIndex;
-        const classIndex = (todos.findIndex(findIt))
+    const findIt = (text) => text.content == todoIndex;
+    const classIndex = (todos.findIndex(findIt))
 
-        console.log(classIndex)
+    console.log(classIndex)
 
         switch (todos[classIndex].class) {
             case 'completed':
@@ -417,7 +418,7 @@ function deleteCheck(e) {
                 break;
         }
 
-        localStorage.setItem('todos', JSON.stringify(todos));
+    localStorage.setItem('todos', JSON.stringify(todos));
     }
 }
 
@@ -484,12 +485,19 @@ function removeTodos(todo) {
         todos = [];
     } else {
         todos = JSON.parse(localStorage.getItem('todos'));
+        console.log(todos);
     }
 
     const todoIndex = todo.children[0].innerText;
-    todos.splice(todos.indexOf(todoIndex), 1);
+    console.log(todoIndex);
+
+    const objectIndex = todos.findIndex((findIt) => findIt.content == todoIndex);
+    todos.splice(objectIndex, 1);
+    
     localStorage.setItem('todos', JSON.stringify(todos));
 }
+
+//Calendar -----------------------------------------------------------------------------------------------
 
 // How to get the object thingy
 // const urls = getUrl();
