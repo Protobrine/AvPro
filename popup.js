@@ -604,39 +604,6 @@ const months = [
     "December"
 ];
 
-// const eventsArr = [
-//     {
-//         day: 1,
-//         month: 4,
-//         year: 2023,
-//         events: [
-//             {
-//                 title: "Event 1 lorem ipsun dolar sit genfa tersd dsad",
-//                 time: "10:00 AM",
-//             },
-//             {
-//                 title: "Event 2",
-//                 time: "11:00 AM",
-//             },
-//         ],
-//     },
-//     {
-//         day: 5,
-//         month: 4,
-//         year: 2023,
-//         events: [
-//             {
-//                 title: "Event 1 lorem ipsun dolar sit genfa tersd dsad",
-//                 time: "10:00 AM",
-//             },
-//             {
-//                 title: "Event 2",
-//                 time: "11:00 AM",
-//             },
-//         ],
-//     },
-// ];
-
 const eventsArr = [];
 
 getEvents();
