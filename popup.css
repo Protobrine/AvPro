@@ -1,3 +1,6 @@
+:root {
+    --primary-clr: #b38add;
+}
 
 *{
     margin: 0;
@@ -251,6 +254,35 @@ input[type=number], select{
     border-radius: 4px;
 }
 
+.timerBtns {
+    width: 100%;
+    height: 54px;
+}
+
+.nrmBtnTime {
+  background-color: #7FC8A9;
+  border: 2px solid #444941; 
+  color: #444941;
+  padding: 10px 24px; 
+  cursor: pointer;
+  height: 100%; 
+  float: left; 
+}
+
+.timerBtns button:not(:last-child) {
+  border-right: none; 
+}
+
+.timerBtns:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.timerBtns button:hover {
+  background-color: #5F7A61;
+}
+
 /* This is what contains in others ----------------------------------------------------------------------------------*/
 
 .divother {
@@ -266,6 +298,14 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* To do list =====================================================================================================================*/
+
+.doListContainer {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .form {
@@ -354,6 +394,603 @@ header {
 .fall {
     transform: translateY(8rem) rotateZ(20deg);
     opacity: 0;
+}
+
+.otherBtns {
+    width: 100%;
+    height: 54px;
+}
+
+.nrmBtnOth {
+  background-color: #7FC8A9;
+  border: 2px solid #444941; 
+  color: #444941;
+  padding: 10px 24px; 
+  cursor: pointer;
+  height: 100%; 
+  float: left; 
+}
+
+.clickedBtnOth {
+    background-color: #5F7A61;
+    border: 2px solid #444941; 
+    color: #444941;
+    padding: 10px 24px; 
+    cursor: pointer;
+    height: 100%; 
+    float: left; 
+}
+
+.otherBtns button:not(:last-child) {
+  border-right: none; 
+}
+
+.otherBtns:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.otherBtns button:hover {
+  background-color: #5F7A61;
+}
+
+/* Calendar ------------------------------------------------------------------------- */
+
+.calendarS {
+    min-height: 380.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #373c4f;
+}
+
+.calendarContain {
+    position: relative;
+    width: 300px;
+    min-height: 250px;
+    margin: 0 auto;
+    padding: 2px;
+    color: #fff;
+    display: flex;
+    /* border-radius: 10px; */
+    background-color: #373c4f;
+}
+
+.left {
+    width: 92%;
+    padding: 10px;
+}
+
+.calendarReal {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    color: #878895;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.calendarReal::before,
+.calendarReal::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: 12px;
+    height: 97%;
+    border-radius: 0 5px 5px 0;
+    background-color: #d3d5d6d7;
+    transform: translateY(-50%);
+}
+.calendarReal::before {
+    height: 94%;
+    left: calc(100% + 12px);
+    background-color: rgb(153, 153, 153);
+}
+
+.calendarReal .month {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.calendarReal .month .prev,
+.calendarReal .month .next {
+    cursor: pointer;
+}
+
+.calendarReal .month .prev:hover
+.calendarReal .month .next:hover {
+    color: var(--primary-clr);
+}
+
+.calendarReal .weekdays {
+    width: 100%;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2px;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.calendarReal .weekdays div {
+    width: 14.28%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendarReal .days {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 2px;
+    font-size: 8px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.calendarReal .days .day {
+   width: 14.28%;
+   height: 32px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   color: var(--primary-clr);
+   border: 1px solid #f5f5f5;
+}
+
+.calendarReal .day:not(.prev-date, .next-date):hover {
+    color: #fff;
+    background: var(--primary-clr);
+}
+
+.calendarReal .days .prev-date,
+.calendarReal .days .next-date {
+    color: #b3b3b3;
+}
+
+.calendarReal .days .active {
+    position: relative;
+    font-size: 14px;
+    color: #fff;
+    background: var(--primary-clr);
+}
+
+.calendarReal .days .active::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 10px 2px var(--primary-clr);
+}
+
+.calendarReal .days .today {
+    font-size: 16px;
+}
+
+.calendarReal .days .event {
+    position: relative;
+}
+
+.calendarReal .days .event::after {
+    content: "";
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    width: 75%;
+    height: 3px;
+    border-radius: 30px;
+    transform: translateX(-50%);
+    background-color: var(--primary-clr);
+}
+
+.calendarReal .event:hover::after {
+    background-color: #fff;
+}
+
+.calendarReal .active.event::after {
+    background-color: #fff;
+    bottom: 20%;
+}
+
+.calendarReal .active.event {
+    padding-bottom: 5px;
+}
+
+.calendarReal .goto-today {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 10px;
+    margin-bottom: 5px;
+    color: var(--primary-clr);
+}
+
+.calendarReal .goto-today .goto {
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid var(--primary-clr);
+}
+
+.calendarReal .goto-today .goto input {
+    width: 100%;
+    height: 25px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0 5px;
+    color: var(--primary-clr);
+    border-radius: 5px;
+}
+
+.calendarReal .goto-today button {
+    padding: 5px 10px;
+    border: 1px solid var(--primary-clr);
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--primary-clr);
+}
+
+.calendarReal .goto-today button:hover {
+    color: #fff;
+    background-color: var(--primary-clr);
+}
+
+.calendarReal .goto-today .goto button {
+    border: none;
+    border-left: 1px solid var(--primary-clr);
+    border-radius: 0; 
+}
+
+.bottom {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    padding: 2px 0;
+    bottom: 65px;
+}
+
+.bottom .today-date {
+    width: 100%;
+    height: auto;
+    padding: 0 4px;
+    padding-left: 7px;
+    margin-top: 5px;
+    margin-bottom: 2px;
+    text-transform: capitalize;
+}
+
+.today-date .event-day {
+    font-size: 32px;
+    font-weight: 500;
+    color: white;
+}
+
+.today-date .event-date {
+    font-size: 16px;
+    font-weight: 400;
+    color: #878895;
+}
+
+.event-table {
+    display: table;
+}
+
+.event-table-cell {
+    display: table-cell;
+}
+
+.e-right {
+    text-align: right;
+}
+
+.calen-button {
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    background: white;
+    color: var(--primary-clr);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.calen-button:hover {
+    background: var(--primary-clr);
+    color: white;
+}
+
+/* Event (Calendar) ---------------------------------------------------------------------------------- */ 
+
+.eventContainer {
+    width: 300px;
+    height: 380.5px;
+    background-color: #373c4f;
+    display: none;
+    color: #fff;
+}
+
+.eventRight {
+    position: absolute;
+    width: 100%;
+    height: 370px;
+    padding: 2px 0;
+}
+
+.eventRight .today-date {
+    width: 100%;
+    height: auto;
+    padding: 0 4px;
+    padding-left: 7px;
+    margin-top: 5px;
+    margin-bottom: 2px;
+    text-transform: capitalize;
+}
+
+.today-date .event-day1 {
+    font-size: 32px;
+    font-weight: 500;
+    color: white;
+}
+
+.today-date .event-date1 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #878895;
+}
+
+.events {
+    width: 100%;
+    height: 100%;
+    max-height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+
+.events .event {
+    position: relative;
+    width: 95%;
+    min-height: 70px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 2px;
+    padding-left: 5px;
+    color: #fff;
+    cursor: pointer;
+    background: linear-gradient(90deg, #3f4458, transparent);
+}
+
+.events .event:nth-child(even) {
+    background: transparent;
+}
+
+.events .event:hover {
+    background: linear-gradient(90deg, var(--primary-clr), transparent);
+}
+
+.events .event .titles {
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.events .event .titles .event-title {
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 10px;
+}
+
+.events .event .titles i {
+    color: var(--primary-clr);
+    font-size: 4px;
+}
+
+.events .event:hover .titles i {
+    color: #fff;
+}
+
+.events .event .titles .event-time {
+    font-size: 8px;
+    font-weight: 400;
+    color: #878895;
+    margin-left: 1.5px;
+    pointer-events: none;
+}
+
+.events .event::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    font-size: 32px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.3;
+    color: var(--primary-clr);
+    transform: translateY(-50%);
+}
+
+.events .event:hover::after {
+    display: flex;
+}
+
+.events .no-event {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #878787;
+}
+
+.add-event-wrapper {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    width: 90%;
+    max-height: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #fff;
+    transform: translateX(-50%);
+    transition: max-height 0.5s;
+}
+
+.add-event-wrapper.active {
+    max-height: 300px;
+}
+
+.add-event-header {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    color: #373c4f;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.add-event-header .close {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-event-header .close:hover {
+    color: var(--primary-clr);
+}
+
+.add-event-header .titles {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.add-event-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+}
+
+.add-event-body .add-event-input {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.add-event-body .add-event-input input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #f5f5f5;
+    padding: 0 10px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #373c4f;
+}
+
+.add-event-body .add-event-input input::placeholder {
+    color: #a5a5a5;
+}
+
+.add-event-body .add-event-input input:focus {
+    border-color: var(--primary-clr);
+}
+
+.add-event-body .add-event-input input:focus::placeholder {
+    color: var(--primary-clr);
+}
+
+.add-event-footer {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.add-event-btn {
+    height: 35px;
+    font-size: 16px;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    color: #fff;
+    background-color: var(--primary-clr);
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid var(--primary-clr);
+}
+
+.add-event-btn:hover {
+    color: var(--primary-clr);
+    background-color: transparent;
+}
+
+.add-event {
+    position: absolute;
+    bottom: 65px;
+    right: 12px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #878895;
+    border: 2px solid #878895;
+    opacity: 0.5;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.add-event:hover {
+    opacity: 1;
+}
+
+.add-event i {
+    pointer-events: none;
 }
 
 /* other design things ----------------------------------------------------------------------------------*/

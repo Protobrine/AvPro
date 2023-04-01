@@ -12,7 +12,8 @@
 <body>
     <div class="container">
         <div class="top">
-            <h4 class="font-effect-shadow-multiple">AvPro</h4>
+            <!-- <h4 class="font-effect-shadow-multiple">AvPro</h4> -->
+            <img src="./images/AVPRO STUDY AID (2).png" style="max-width: 50%; height: auto;" alt="AvPro">
         </div>
         <div class="transitionDesign"></div>
         <div class="blocks">
@@ -20,9 +21,6 @@
             <!-- The block division -->
 
             <div class="divblock" id="divblock">
-                <div class="blockBtns">
-                    <button class="blkButton" id="blockSite">Block this site</button>
-                </div>
                 <div class="theLink">
                     <p class="middle" id="linkNow">
                         No web detected
@@ -35,11 +33,18 @@
                     <ul id="urlList">
                     </ul>
                 </div>
+                <div class="blockBtns">
+                    <button class="blkButton" id="blockSite">Block this site</button>
+                </div>
             </div>
 
             <!-- The Timing Divison -->
 
             <div class="divtiming" id="divtiming">
+                <div class="timerBtns" style="width: 100%;">
+                    <button class="nrmBtnTime" type="button" style="width: 50%;"><i class="fa-regular fa-clock fa-2x"></i></button>
+                    <button class="nrmBtnTime" type="button" style="width: 50%;"><i class="fa-solid fa-hourglass fa-2x"></i></button>
+                </div>
                 <div class="marginThing">
                     <table class="tableTime">
                         <tr>
@@ -72,19 +77,110 @@
             <!-- The Other Division -->
 
             <div class="divother" id="divother">
-                <header>
-                    <h1>To do list</h1>
-                </header>
-                <form class="form">
-                    <input type="text" class="todo-input" placeholder="Something in mind?">
-                    <button class="todo-button" type="submit">
-                        <i class="fas fa-plus-square"></i>
-                    </button>
-                </form>
-                <div class="todo-container">
-                    <ul class="todo-list">
-                    </ul>
+                <div class="otherBtns" style="width: 100%;">
+                    <button class="nrmBtnOth" type="button" style="width: 50%;" id="toDoList"><i class="fa-solid fa-list-check fa-2x"></i></button>
+                    <button class="nrmBtnOth" type="button" style="width: 50%;" id="otherCalendar"><i class="fa-regular fa-calendar fa-2x"></i></button>
                 </div>
+
+                <!-- to do list -->
+
+                <div id="doListContainer" class="doListContainer">
+                    <form class="form">
+                        <input type="text" class="todo-input" placeholder="Something in mind?">
+                        <button class="todo-button" type="submit">
+                            <i class="fas fa-plus-square"></i>
+                        </button>
+                    </form>
+                    <div class="todo-container">
+                        <ul class="todo-list">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- calendar -->
+
+                <div id="calendarS" class="calendarS">
+                    <div class="calendarContain">
+                        <div class="left">
+                            <div class="calendarReal">
+                                <div class="month">
+                                    <i class="fa fa-angle-left prev"></i>
+                                    <div class="date"></div>
+                                    <i class="fa fa-angle-right next"></i>
+                                </div>
+                                <div class="weekdays">
+                                    <div>sun</div>
+                                    <div>mon</div>
+                                    <div>tue</div>
+                                    <div>wed</div>
+                                    <div>thu</div>
+                                    <div>fri</div>
+                                    <div>sat</div>
+                                </div>
+                                <div class="days">
+                                    
+                                </div>
+                                <div class="goto-today">
+                                    <div class="goto">
+                                        <input type="text" placeholder="mm/yyyy" class="date-input">
+                                        <button class="goto-btn">go</button>
+                                    </div>
+                                    <button class="today-btn">today</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <div class="today-date event-table">
+                            <div class="event-table-cell">
+                                <div class="event-day">Sat</div>
+                                <div class="event-date">1 April 2023</div>
+                            </div>
+                            <button class="goto-event event-table-cell e-right calen-button" id="eventBtn">Event</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Events -->
+
+                <div class="eventContainer" id="eventContainer">
+                    <div class="eventRight">
+                        <div class="today-date event-table">
+                            <div class="event-table-cell">
+                                <div class="event-day1">Sat</div>
+                                <div class="event-date1">1 April 2023</div>
+                            </div>
+                            <button class="goto-event event-table-cell e-right calen-button" id="eventBtn2">Event</button>
+                        </div>
+                        <div class="events">
+                            <!-- Soon events -->
+                        </div>
+                        <div class="add-event-wrapper">
+                            <div class="add-event-header">
+                                <div class="titles">Add Event</div>
+                                <i class="fas fa-times close"></i>
+                            </div>
+                            <div class="add-event-body">
+                                <div class="add-event-input">
+                                    <input type="text" placeholder="Event Name" class="event-name">
+                                </div>
+                                <div class="add-event-input">
+                                    <input type="text" placeholder="Event Time From" class="event-time-from">
+                                </div>
+                                <div class="add-event-input">
+                                    <input type="text" placeholder="Event Time to" class="event-time-to">
+                                </div>
+                            </div>
+                            <div class="add-event-footer">
+                                <button class="add-event-btn">add event</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="add-event">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+
             </div>
         </div>
         <div class="buttons" style="width: 100%;">

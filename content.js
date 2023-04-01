@@ -11,7 +11,9 @@ const generateHTML = (pageName) => {
       <div class="cloud x5"></div>
   </div>
   <div class='c'>
-      <div class='_404'> AvPro </div>
+      <div class='_404'> 
+        <img src="https://media.discordapp.net/attachments/770843909760090133/1087204562181554236/AVPRO_STUDY_AID_3.png?width=887&height=361" style="max-width: 65%; height: auto;" alt="AvPro">
+      </div>
       <hr>
       <div class='_1'>Stop procrastinating!</div>
       <br>
@@ -40,14 +42,7 @@ const generateSTYLES = () => {
       width: 80%;
       margin: 100px auto;
     }
-    ._404 {
-      font-size: 220px;
-      position: relative;
-      display: inline-block;
-      z-index: 2;
-      height: 250px;
-      letter-spacing: 15px;
-    }
+
     ._1 {
       text-align: center;
       display: block;
@@ -302,7 +297,9 @@ function Block(block) {
     document.body.innerHTML = generateHTML();
     const pressMeDaddy = document.getElementById("yesButton").getElementsByClassName("dButton")[0];
     pressMeDaddy.addEventListener("click", function () {
-    alert("You pressed the button");
+      // alert("You pressed the button");
+      close()
+
   });
   }
 }
