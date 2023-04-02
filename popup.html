@@ -42,35 +42,43 @@
 
             <div class="divtiming" id="divtiming">
                 <div class="timerBtns" style="width: 100%;">
-                    <button class="nrmBtnTime" type="button" style="width: 50%;"><i class="fa-regular fa-clock fa-2x"></i></button>
-                    <button class="nrmBtnTime" type="button" style="width: 50%;"><i class="fa-solid fa-hourglass fa-2x"></i></button>
+                    <button class="nrmBtnTime" type="button" style="width: 50%;" id="normalTimer"><i class="fa-regular fa-clock fa-2x"></i></button>
+                    <button class="nrmBtnTime" type="button" style="width: 50%;" id="pomodoroTimer"><i class="fa-solid fa-hourglass fa-2x"></i></button>
                 </div>
-                <div class="marginThing">
-                    <table class="tableTime">
-                        <tr>
-                            <td id="hrs">00</td>
-                            <td>:</td>
-                            <td id="min">00</td>
-                            <td>:</td>
-                            <td id="sec">00</td>
-                        </tr>
-                    </table>
-                    <div class="linebreak"></div>
-                    <form class="walangLabel" action="popup.html">
-                        <label for="hours">hrs</label>
-                        <label for="minutes">min</label>
-                        <label for="seconds">sec</label>
-                    </form>
-                    <form class="walangLabel" action="popup.html">
-                        <input type="number" value="00" min="0" max="23" id="hours">
-                        <input type="number" value="00" min="0" max="59" id="minutes">
-                        <input type="number" value="00" min="0" max="59" id="seconds">
-                    </form>
-                    <div class="linebreak"></div>
-                    <div class="timingBtnDiv">
-                        <button class="timingbtn" type="button" id="start">Start</button>
-                        <button class="timingbtn" type="button" id="pause">Pause</button>
+                <div class="normalTimer" id="normalContainer">
+                    <div class="marginThing">
+                        <table class="tableTime">
+                            <tr>
+                                <td id="hrs">00</td>
+                                <td>:</td>
+                                <td id="min">00</td>
+                                <td>:</td>
+                                <td id="sec">00</td>
+                            </tr>
+                        </table>
+                        <div class="linebreak"></div>
+                        <form class="walangLabel" action="popup.html">
+                            <label for="hours">hrs</label>
+                            <label for="minutes">min</label>
+                            <label for="seconds">sec</label>
+                        </form>
+                        <form class="walangLabel" action="popup.html">
+                            <input type="number" value="00" min="0" max="23" id="hours">
+                            <input type="number" value="00" min="0" max="59" id="minutes">
+                            <input type="number" value="00" min="0" max="59" id="seconds">
+                        </form>
+                        <div class="linebreak"></div>
+                        <div class="timingBtnDiv">
+                            <button class="timingbtn" type="button" id="start">Start</button>
+                            <button class="timingbtn" type="button" id="pause">Pause</button>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Pomodoro Timer -->
+
+                <div class="pomodoroTime" id="pomodoroContainer">
+                    Hello World
                 </div>
             </div>
 

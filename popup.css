@@ -195,14 +195,54 @@
     display: none;
 }
 
-/* .backgroundImg {
+.timerBtns {
     width: 100%;
-    height: 100%;
-    background-image: url("https://media.discordapp.net/attachments/839198357674131516/1081537995171184660/AvocadoLogo.png?width=625&height=625");
-    background-size: 400px 400px;
-    background-position: center;
-    opacity: 0.7;
-} */
+    height: 54px;
+}
+
+.timerBtns button:not(:last-child) {
+    border-right: none; 
+}
+
+.timerBtns:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.timerBtns button:hover {
+    background-color: #5F7A61;
+}
+
+.nrmBtnTime {
+  background-color: #7FC8A9;
+  border: 2px solid #444941; 
+  color: #444941;
+  padding: 10px 24px; 
+  cursor: pointer;
+  height: 100%; 
+  float: left; 
+}
+
+.clickedBtnTime {
+    background-color: #5F7A61;
+    border: 2px solid #444941; 
+    color: #444941;
+    padding: 10px 24px; 
+    cursor: pointer;
+    height: 100%; 
+    float: left; 
+}
+
+
+/* Normal Timer ---------------------------------------------------------------------------------- */
+
+.normalTimer {
+    width: 100%;
+    height: auto;
+    background-color: #D5EEBB;
+    display: block;
+}
 
 .tableTime {
     width: 100%;
@@ -254,7 +294,7 @@ input[type=number], select{
     border-radius: 4px;
 }
 
-.timerBtns {
+/* .timerBtns {
     width: 100%;
     height: 54px;
 }
@@ -281,6 +321,15 @@ input[type=number], select{
 
 .timerBtns button:hover {
   background-color: #5F7A61;
+} */
+
+/* Pomodoro Timer ---------------------------------------------------------------------------------- */
+
+.pomodoroTime {
+    width: 100%;
+    height: auto;
+    background-color: #D5EEBB;
+    display: none;
 }
 
 /* This is what contains in others ----------------------------------------------------------------------------------*/

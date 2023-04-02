@@ -2,18 +2,27 @@
 const btn_blocking = document.getElementById("blocking");
 const btn_timing = document.getElementById("timing");
 const btn_otherThings = document.getElementById("otherThings");
+
 // Division IDs
 const divblock = document.getElementById("divblock");
 const divtiming = document.getElementById("divtiming");
 const divother = document.getElementById("divother");
+
+// Timing Division
+
+const normalContainer = document.getElementById("normalContainer"),
+    pomodoroContainer = document.getElementById("pomodoroContainer");
+
 // Timing buttons
-const startBtn = document.getElementById('start');
-const pauseBtn = document.getElementById('pause');
+const startBtn = document.getElementById('start'),
+    pauseBtn = document.getElementById('pause'),
+    normalTime = document.getElementById('normalTimer'),
+    pomodoroTime = document.getElementById('pomodoroTimer');
+
 // Blocklist buttons
-// const testButton = document.getElementById('testBlock');
 const btnBlockSite = document.getElementById('blockSite');
 
-//Division block
+//Division others
 const toDoContainer = document.getElementById('doListContainer'),
     calendarS = document.getElementById('calendarS'),
     eventBtn = document.getElementById("eventBtn"),
@@ -71,11 +80,23 @@ if (toDoList) {
     });
 }
 
+if (normalTime) {
+    normalTime.addEventListener('click', () => {
+        normalContainer.style.display='block';
+        pomodoroContainer.style.display='none';
+    });
+
+    pomodoroTime.addEventListener('click', () => {
+        normalContainer.style.display='none';
+        pomodoroContainer.style.display='block';
+    })
+}
+
 // Designs -----------------------------------------------------------------------------------------------
 
+// AvPro buttons -----------------------------------------------------------------------------------------------
 const bottomBtnList = document.querySelectorAll('.nrmBtn')
 let lastClicked;
-let lastOthClicked;
 
 bottomBtnList.forEach( bottomBtn => {
     lastClicked = Number(localStorage.lastClicked) 
@@ -124,15 +145,19 @@ bottomBtnList.forEach( bottomBtn => {
     });
 });
 
+// Other buttons -----------------------------------------------------------------------------------------------
 const otherBtns = document.querySelectorAll('.nrmBtnOth')
+let lastOthClicked;
 
 otherBtns.forEach( otherBtn => {
 
     lastOthClicked = Number(localStorage.lastClickedOth) 
     console.log('last othBtn saved is ' + lastOthClicked)
 
+    console.log('otherBtn[0] yes ' + otherBtn[0])
+
     if (isNaN(lastOthClicked)) {
-        otherBtn[0].classList.add('clickedBtnOth');
+        otherBtns[0].classList.add('clickedBtnOth');
     }
 
     for (let index = 0; index < otherBtns.length; index++) {
@@ -160,6 +185,51 @@ otherBtns.forEach( otherBtn => {
             if (otherBtn == otherBtns[index]) {
                 console.log('otherBtns, the same with the ' + index)
                 localStorage.lastClickedOth = index;
+            }
+        }
+    });
+});
+
+// Timer buttons -----------------------------------------------------------------------------------------------
+
+const timerBtns = document.querySelectorAll('.nrmBtnTime')
+let lastTimeClicked;
+
+timerBtns.forEach( timerBtn => {
+
+    lastTimeClicked = Number(localStorage.lastClickedTime) 
+
+    console.log("Time clicked is " + lastTimeClicked);
+
+    if (isNaN(lastTimeClicked)) {
+        timerBtns[0].classList.add('clickedBtnTime');
+    }
+
+    for (let index = 0; index < timerBtns.length; index++) {
+        if (lastTimeClicked == index) {
+            timerBtns[index].classList.add('clickedBtnTime');
+            switch (index) {
+                case 0:
+                    normalContainer.style.display='block';
+                    pomodoroContainer.style.display='none';
+                    break;
+
+                case 1:
+                    normalContainer.style.display='none';
+                    pomodoroContainer.style.display='block';
+                    break;
+            }
+        }
+    }
+
+    timerBtn.addEventListener('click', () => {
+        document.querySelector('.clickedBtnTime')?.classList.remove('clickedBtnTime');
+        timerBtn.classList.add('clickedBtnTime');
+
+        for (let index = 0; index < timerBtns.length; index++) {
+            if (timerBtn == timerBtns[index]) {
+                console.log('timerBtns, the same with the ' + index)
+                localStorage.lastClickedTime = index;
             }
         }
     });
@@ -1012,7 +1082,7 @@ function saveEvents() {
 }
 
 function getEvents() {
-    if (localStorage.getItem("events" == null)) {
+    if (localStorage.getItem("events") == null )   {
         return;
     }
     eventsArr.push(...JSON.parse(localStorage.getItem("events")));
