@@ -1,5 +1,17 @@
 :root {
-    --primary-clr: #b38add;
+    /* Calendar */
+    
+    --primary-clr: #71c57a;
+
+    /* Pomodoro Timer */
+
+    font-size: 62.5%;
+
+    --color-primary: #D5EEBB;
+    --color-secondary: #199741;
+    --color-font: #1d2e24df;
+
+    --color-shadow: #49aa6880;
 }
 
 *{
@@ -15,6 +27,7 @@
     width: 300px;
     height: 550px;
     background-color: #7FC8A9;
+    color: var(--color-font);
 }
 .top {
     display: block;
@@ -133,7 +146,7 @@
 
 .middle {
     display: inline;
-    border: 2px rgb(0, 0, 0);
+    border: 2px #1d2e24df;
     border-style: solid;
     padding: 10px;
 }
@@ -141,7 +154,7 @@
 .webList {
     height: 200px;
     width: 275px;
-    border: 2px grey;
+    border: 2px #1d2e24a2;
     border-style: solid;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     overflow: auto;
@@ -234,6 +247,16 @@
     float: left; 
 }
 
+.disabledBtnTime {
+    background-color: #609EA2;
+    border: 2px solid #444941; 
+    color: #444941;
+    padding: 10px 24px; 
+    cursor: pointer;
+    height: 100%; 
+    float: left; 
+}
+
 
 /* Normal Timer ---------------------------------------------------------------------------------- */
 
@@ -294,41 +317,121 @@ input[type=number], select{
     border-radius: 4px;
 }
 
-/* .timerBtns {
-    width: 100%;
-    height: 54px;
-}
-
-.nrmBtnTime {
-  background-color: #7FC8A9;
-  border: 2px solid #444941; 
-  color: #444941;
-  padding: 10px 24px; 
-  cursor: pointer;
-  height: 100%; 
-  float: left; 
-}
-
-.timerBtns button:not(:last-child) {
-  border-right: none; 
-}
-
-.timerBtns:after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-.timerBtns button:hover {
-  background-color: #5F7A61;
-} */
-
 /* Pomodoro Timer ---------------------------------------------------------------------------------- */
 
 .pomodoroTime {
     width: 100%;
-    height: auto;
-    background-color: #D5EEBB;
+    height: 380.5px;
+    background-color: var(--color-primary);
+    display: none;
+    font-size: 16px;
+    font-family: 'Open sans', sans-serif;
+}
+
+.theColor {
+    color: var(--color-font);
+}
+
+.theSize {
+    font-size: 24px;
+}
+
+section {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.pomoContainer {
+    width: min(200px, 100%);
+    margin-inline: auto;
+    padding-inline: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.painel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    width: 160px;
+    margin-block: 15px;
+    padding: 16px;
+    border-radius: 160px;
+    -webkit-box-shadow: 0px 0px 15px 10px var(--color-shadow);
+    box-shadow: 0px 0px 15px 10px var(--color-shadow);
+}
+
+.painel p {
+    opacity: .8;
+    transition: 1s ease-in;
+}
+
+.painel p.active {
+    opacity: 1;
+    color: var(--color-secondary);
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    -webkit-box-shadow: 0px 0px 15px 10px var(--color-shadow);
+    box-shadow: 0px 0px 15px 10px var(--color-shadow);
+}
+
+.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background-color: var(--color-secondary);
+    position: relative;
+}
+
+.circle::before {
+    content: "";
+    position: absolute;
+    width: 95%;
+    height: 95%;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+}
+
+.time {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.time p {
+    font-size: 30px;
+}
+
+.time p:nth-of-type(2) {
+    position: relative;
+    top: -2px;
+    margin-inline: 16px;
+}
+
+.controls {
+    margin-top: 12px;
+}
+
+.controls button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;   
+}
+
+.controls #pomoReset {
     display: none;
 }
 
@@ -465,7 +568,7 @@ header {
     border: 2px solid #444941; 
     color: #444941;
     padding: 10px 24px; 
-    cursor: pointer;
+    pointer-events: none;
     height: 100%; 
     float: left; 
 }
@@ -488,10 +591,10 @@ header {
 
 .calendarS {
     min-height: 380.5px;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
-    background-color: #373c4f;
+    background-color: #bcd2a4;
 }
 
 .calendarContain {
@@ -503,7 +606,7 @@ header {
     color: #fff;
     display: flex;
     /* border-radius: 10px; */
-    background-color: #373c4f;
+    background-color: #bcd2a4;
 }
 
 .left {

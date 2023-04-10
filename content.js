@@ -303,3 +303,14 @@ function Block(block) {
   });
   }
 }
+
+// chrome.runtime.sendMessage({
+//   method: 'refresh',
+//   key: 'key'
+// }, (response) => {
+//   let refresh = response.value
+//   console.log("content check " + refresh)
+//   if (refresh == "refresh") {
+//     location.reload();
+//   }
+// })

@@ -7,7 +7,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="popup.css">
     <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rancho&effect=	shadow-multiple">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -23,7 +25,7 @@
             <div class="divblock" id="divblock">
                 <div class="theLink">
                     <p class="middle" id="linkNow">
-                        No web detected
+                        Site blocker
                     </p>
                 </div>
                 <div class="webList">
@@ -78,7 +80,29 @@
                 <!-- Pomodoro Timer -->
 
                 <div class="pomodoroTime" id="pomodoroContainer">
-                    Hello World
+                    <section>
+                        <div class="pomoContainer">
+                            <h1 class="theColor theSize">Pomodoro</h1>
+
+                            <div class="painel">
+                                <p class="theColor" id="work">work</p>
+                                <p class="theColor" id="break">break</p>
+                            </div>
+                            <div class="timer">
+                                <div class="circle">
+                                    <div class="time">
+                                        <p class="theColor" id="pomoMinutes"></p>
+                                        <p class="theColor">:</p>
+                                        <p class="theColor" id="pomoSeconds"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="controls">
+                                <button id="pomoStart"><i class="fa-solid fa-play theColor theSize"></i></button>
+                                <button id="pomoReset"><i class="fa-solid fa-arrow-rotate-left theColor theSize"></i></button>
+                            </div>  
+                        </div>
+                    </section>
                 </div>
             </div>
 

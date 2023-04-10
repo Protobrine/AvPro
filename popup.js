@@ -256,6 +256,10 @@ if (startBtn) {
         countdownUpdate();
         chromeCount();
         urlBlockTime();
+        alert("Press ok to refresh the page")
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.reload(tabs[0].id);
+        });
     });
 }
 
@@ -290,6 +294,9 @@ function countdownUpdate() {
     document.getElementById("pause").disabled = false;
     document.getElementById("blocking").disabled = true;
     bottomBtnList[0].classList.add('disabledBtn');
+    document.getElementById("pomodoroTimer").disabled = true;
+    timerBtns[1].classList.add('disabledBtnTime');
+
     yes = setInterval(counting, 1000);
     function counting() {
         if (totalSeconds >= 0) {
@@ -312,6 +319,8 @@ function countdownUpdate() {
             document.getElementById("start").disabled = false;
             document.getElementById("blocking").disabled = false;
             document.querySelector('.disabledBtn').classList.replace('disabledBtn' ,'nrmBtn');
+            document.getElementById("pomodoroTimer").disabled = false;
+            document.querySelector('.disabledBtnTime').classList.replace('disabledBtnTime' ,'nrmBtnTime');
         }
         totalSeconds--;
     } 
@@ -327,12 +336,166 @@ function getValue(seconds) {
 
 function chromeCount() {
     let totalSeconds = getValue(seconds);
+    console.log("background check " + totalSeconds)
     chrome.runtime.sendMessage({
         method: 'send',
         key: 'key',
         value: totalSeconds
     }, () => {
     });
+}
+
+// Pomodoro Timer -----------------------------------------------------------------------------------------------
+
+const pomoStart = document.getElementById('pomoStart');
+const pomoReset = document.getElementById('pomoReset');
+
+let workTitle = document.getElementById("work");
+let breakTitle = document.getElementById("break");
+
+function getPomoTimer() {
+    chrome.runtime.sendMessage({method: 'sendPomo', key: 'key',}, (response) => {
+        let pomoObj = response.value;
+        console.log("PomoObj check: " + pomoObj.workTime + " " + pomoObj.breakTime + " " + pomoObj.seconds + " " + pomoObj.breakCount);
+
+        document.getElementById("pomoMinutes").innerHTML = pomoObj.workTime.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+        document.getElementById("pomoSeconds").innerHTML = pomoObj.seconds.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+
+        if (pomoObj.breakCount == 0) {
+            breakTitle.classList.remove('active');
+            workTitle.classList.add('active');
+
+        } else {
+            if (pomoObj.breakCount % 2 == 0) {
+                breakTitle.classList.remove('active');
+                workTitle.classList.add('active');
+    
+            } else {
+                workTitle.classList.remove('active');
+                breakTitle.classList.add('active');
+    
+            }
+        }
+
+        if (pomoObj.pomoSwitch == "On") {
+            pomodoStart();
+        } 
+    })
+}
+
+addEventListener('DOMContentLoaded', () => {
+    getPomoTimer()
+});
+
+if (pomoStart) {
+    pomoStart.addEventListener('click', () => {
+        pomodoStart();
+        chrome.runtime.sendMessage({
+            method: 'pomoBg', 
+            key: 'key', 
+            value: "Start"
+        }, () => {
+        });
+        alert("Press ok to refresh the page")
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.reload(tabs[0].id);
+        });
+    });
+    
+    pomoReset.addEventListener('click', () => {
+        pomodoReset();
+    })
+}
+
+function pomodoStart() {
+
+    let workTime = document.getElementById("pomoMinutes").innerHTML;
+    let seconds = document.getElementById("pomoSeconds").innerHTML;
+    let actualWork = 25;
+    let breakTime = 5;
+    let breakCount;
+
+    console.log("Worktime check " + workTime);
+
+    document.getElementById("normalTimer").disabled = true;
+    timerBtns[0].classList.add('disabledBtnTime');
+    document.getElementById("blocking").disabled = true;
+    bottomBtnList[0].classList.add('disabledBtn');
+    
+    pomoStart.style.display='none';
+    pomoReset.style.display='block';
+
+    let workMinutes = workTime;
+
+    if (seconds == 00) {
+        seconds = 59;
+        workMinutes = workMinutes - 1;
+    }    
+        
+    if (workTitle.classList.contains('active')) {
+        breakCount = 0
+    } else if (breakTitle.classList.contains('active')) {
+        breakCount = 1
+    } else {
+        breakCount = 0;
+    }
+
+    let timerFunction = () => {
+        document.getElementById("pomoMinutes").innerHTML = workMinutes.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+        document.getElementById("pomoSeconds").innerHTML = seconds.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+
+        console.log("Pomo seconds is " + seconds)
+        seconds = seconds - 1;
+
+        if (seconds == -1) {
+            workMinutes = workMinutes -1;
+            console.log("Pomo minutes is " + workMinutes)
+            if (workMinutes == -1) {
+                if (breakCount % 2 == 0) {
+                    workMinutes = breakTime - 1;
+                    breakCount++
+
+                    workTitle.classList.remove('active');
+                    breakTitle.classList.add('active');
+                } else {
+                    workMinutes = actualWork - 1;
+                    breakCount++
+
+                    breakTitle.classList.remove('active');
+                    workTitle.classList.add('active');
+                }
+            }
+            seconds = 59;
+        }
+    }
+
+    pomo = setInterval(timerFunction, 1000);
+}
+
+function pomodoReset() {
+    let workTime = 25;
+
+    clearInterval(pomo);
+    pomoStart.style.display='block';
+    pomoReset.style.display='none';
+
+    chrome.runtime.sendMessage({
+        method: 'pomoBg', 
+        key: 'key', 
+        value: "Reset"
+    }, () => {
+    });
+
+    document.getElementById("pomoMinutes").innerHTML = workTime.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+    document.getElementById("pomoSeconds").innerHTML = "00";
+
+    workTitle.classList.add('active');
+    breakTitle.classList.remove('active');
+
+    document.getElementById("blocking").disabled = false;
+    document.querySelector('.disabledBtn').classList.replace('disabledBtn' ,'nrmBtn');
+    document.getElementById("normalTimer").disabled = false;
+    document.querySelector('.disabledBtnTime').classList.replace('disabledBtnTime' ,'nrmBtnTime');
 }
 
 //Blacklist -----------------------------------------------------------------------------------------------

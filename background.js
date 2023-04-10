@@ -2,6 +2,20 @@ let value = 0;
 let url;
 const blockedSites = [];
 
+
+let workTime = 25;
+let breakTime = 5;
+let seconds = "00";
+let breakCount = 0
+let pomoSwitch = "Off"
+let pomoTimer = {
+  workTime: workTime,
+  breakTime: breakTime,
+  seconds: seconds,
+  breakCount: breakCount,
+  pomoSwitch: pomoSwitch
+}
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   switch (message.method) {
     case 'send':
@@ -41,6 +55,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           sendResponse({value: 'block'})
         }
       }
+      if (pomoValue > 0) {
+        if (equalBlocked) {
+          console.log('Procrastinated');
+          sendResponse({value: 'block'})
+        }
+      }
       break;
 
     case 'urlGet':
@@ -71,6 +91,68 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       console.log(blockedSites)
       break;
 
+    case 'pomoBg':
+      pomoCheck = message.value;
+      if (pomoCheck == "Start") {
+        console.log("Background pomo check " + pomoTimer.workTime + " " + pomoTimer.breakTime + " " + pomoTimer.seconds);
+        pomoValue = 1;
+
+        pomoTimer.pomoSwitch = "On"
+        pomoTimer.seconds = 59;
+
+        // let workMinutes = pomoTimer.workTime - 1;
+        // let breakMinutes = pomoTimer.breakTime - 1;
+
+        pomoTimer.workTime = pomoTimer.workTime - 1;
+        pomoTimer.breakTime = pomoTimer.breakTime - 1;
+
+        let timerFunction = () => {
+
+          console.log("PomoBg seconds is " + pomoTimer.seconds)
+          pomoTimer.seconds = pomoTimer.seconds - 1;
+
+          if (pomoTimer.seconds == -1) {
+            pomoTimer.workTime = pomoTimer.workTime -1;
+            console.log("PomoBg minutes is " + pomoTimer.workTime)
+              
+              if (pomoTimer.workTime == -1) {
+
+                  if (pomoTimer.breakCount % 2 == 0) {
+                    pomoTimer.workTime = pomoTimer.breakTime;
+                    pomoTimer.breakCount++
+                    console.log("Take a break -pomo: " + pomoTimer.breakCount);
+                    pomoValue = 0;
+
+                  } else {
+                    pomoTimer.workTime = (workTime-1);
+                    pomoTimer.breakCount++
+                    console.log("Continue working -pomo: " + pomoTimer.breakCount);
+                    pomoValue = 1;
+
+                  }
+              }
+              pomoTimer.seconds = 59;
+          }
+        }
+        
+        pomo = setInterval(timerFunction, 1000);
+      } else if (pomoCheck == "Reset") {
+        clearInterval(pomo);
+        pomoTimer = {
+          workTime: workTime,
+          breakTime: breakTime,
+          seconds: seconds,
+          breakCount: breakCount,
+          pomoSwitch: pomoSwitch
+        }
+        pomoValue = 0;
+      }
+      
+      break;
+
+    case 'sendPomo':
+      sendResponse({value: pomoTimer});
+      break;
   }
   return true;
 });
